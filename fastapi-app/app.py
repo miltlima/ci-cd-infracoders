@@ -1,6 +1,6 @@
 import random
 from fastapi import FastAPI
-from fastapi.responses import HTMLResponse 
+from fastapi.responses import HTMLResponse
 
 
 app = FastAPI()
@@ -13,7 +13,7 @@ def change_color():
     return f'''
         <html>
             <head>
-                <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+                <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
                 <style>
                     body {{
                         background-color: {color};
