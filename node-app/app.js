@@ -1,11 +1,21 @@
 const express = require('express');
 const app = express();
-const port = 3000;
+const port = 3001;
+
+
+const prom = require('prom-client');
+const register = prom.register;
+const counter = new prom.Counter({
+  name: 'color_change_counter_total',
+  help: 'Count the color change',
+  labelNames: ['statusCode']
+}) 
 
 const colors = ['red', 'green', 'blue', 'yellow', 'orange']
 app.get('/changeColor', (req, res) => {
     const randomIndex = Math.floor(Math.random() * colors.length);
     const color = colors[randomIndex];
+    counter.labels('200').inc();
 
     res.send(`
     <html>
@@ -34,6 +44,11 @@ app.get('/changeColor', (req, res) => {
         </body>
     </html>
 `);
+});
+
+app.get('/metrics', async (req, res) => {
+  res.set('Content-Type', register.contentType);
+  res.end(await register.metrics());
 });
 
 app.listen(port, () => {
