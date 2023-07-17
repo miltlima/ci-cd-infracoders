@@ -1,0 +1,14 @@
+replicaCount: 1
+
+image:
+  repository: bonovoo/node-app
+  pullPolicy: IfNotPresent
+  tag: "latest"
+
+service:
+  name: node-app-service
+  type: ClusterIP
+  port: 3000
+  protocol: TCP
+  targetPort: 3000
+
