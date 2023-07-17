@@ -1,21 +1,41 @@
 const express = require('express');
 const app = express();
-const port = 3001;
+const port = 3000;
 
 
 const prom = require('prom-client');
 const register = prom.register;
+
+// Count change color config 
 const counter = new prom.Counter({
   name: 'color_change_counter_total',
   help: 'Count the color change',
   labelNames: ['statusCode']
 }) 
 
+// Histogram
+const histogram = new prom.Histogram({
+  name: 'change_color_time_seconds',
+  help: 'Response time in seconds API',
+  buckets: [ 0.1, 0.2, 0.3, 0.4, 0.5]
+})
+
+// Summary
+const summary = new prom.Summary({
+  name: 'change_color_request_time_summary',
+  help: 'Response time in seconds to change color request',
+  percentiles: [0.01, 0.1, 0.5, 0.9, 0.99]
+});
+
+
 const colors = ['red', 'green', 'blue', 'yellow', 'orange']
 app.get('/changeColor', (req, res) => {
     const randomIndex = Math.floor(Math.random() * colors.length);
     const color = colors[randomIndex];
     counter.labels('200').inc();
+    const time = Math.random();
+    histogram.observe(time);
+    summary.observe(time);
 
     res.send(`
     <html>
