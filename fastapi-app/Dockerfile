@@ -27,4 +27,4 @@ USER $USER
 EXPOSE 8000
 
 # Inicie o aplicativo FastAPI usando o Uvicorn como servidor ASGI
-CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
