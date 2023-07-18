@@ -8,7 +8,7 @@ const register = prom.register;
 
 // Count change color config 
 const counter = new prom.Counter({
-  name: 'color_change_counter_total',
+  name: 'change_change_counter_total',
   help: 'Count the color change',
   labelNames: ['statusCode']
 }) 
