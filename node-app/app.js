@@ -8,7 +8,7 @@ const register = prom.register;
 
 // Count change color config 
 const counter = new prom.Counter({
-  name: 'change_change_counter_total',
+  name: 'change_color_counter_total',
   help: 'Count the color change',
   labelNames: ['statusCode']
 }) 
@@ -32,8 +32,10 @@ const colors = ['red', 'green', 'blue', 'yellow', 'orange']
 app.get('/changeColor', (req, res) => {
     const randomIndex = Math.floor(Math.random() * colors.length);
     const color = colors[randomIndex];
-    counter.labels('200').inc();
+    
     const time = Math.random();
+    
+    counter.labels('200').inc();
     histogram.observe(time);
     summary.observe(time);
 
