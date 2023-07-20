@@ -1,0 +1,9 @@
+apiVersion: v2
+name: fastapi-app
+description: A Helm chart for fastapi-app change background color
+type: application
+version: 0.1.0
+appVersion: "1.0.0"
+maintainers:
+- name: Milton Jesus
+  email: example@example.com

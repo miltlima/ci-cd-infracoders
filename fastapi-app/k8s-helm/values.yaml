@@ -1,0 +1,13 @@
+replicaCount: 1
+
+image:
+  repository: bonovoo/fastapi-app
+  pullPolicy: IfNotPresent
+  tag: "latest"
+
+service:
+  name: fastapi-app-service
+  type: ClusterIP
+  port: 8000
+  protocol: TCP
+  targetPort: 8000
