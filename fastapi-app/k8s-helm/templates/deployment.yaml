@@ -3,16 +3,16 @@ kind: Deployment
 metadata: 
   name: {{ .Release.Name }}-fastapi-app
   labels:
-    app: fastapi
+    app: fastapi-app
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: fastapi
+      app: fastapi-app
   template:
     metadata:
       labels:
-        app: fastapi
+        app: fastapi-app
     spec:
       containers:
         - name: {{ .Chart.Name }}
