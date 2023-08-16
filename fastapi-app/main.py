@@ -1,14 +1,14 @@
 import random
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
-from prometheus_client import make_asgi_app, Counter, Summary, Histogram, generate_latest
-from prometheus_fastapi_instrumentator import Instrumentator
+from prometheus_client import make_asgi_app, Counter, Summary, Histogram
 
 
-app = FastAPI()
+
+app = FastAPI(debug=False)
 
 colors = ["red", "green", "blue", "yellow", "orange", "pink", "purple"]
-counter = Counter("change_color_counter_total", "Count the color change")
+counter = Counter("change_color_total", "Count the color change")
 summary = Summary(
     "change_color_request_time_seconds",
     "Response time in seconds to change color request",
@@ -52,9 +52,7 @@ async def change_color():
                 </html>
             """
 
-@app.get("/metrics")
-async def get_metrics():
-    return generate_latest()
+metrics_app = make_asgi_app()
+app.mount("/metrics", metrics_app)
 
-if __name__ == '__main__':
-    instrumentator.instrument(app).expose(app, port=8000)
+

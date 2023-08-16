@@ -8,7 +8,7 @@ const register = prom.register;
 
 // Count change color config 
 const counter = new prom.Counter({
-  name: 'change_color_counter_total',
+  name: 'change_color_total',
   help: 'Count the color change',
   labelNames: ['statusCode']
 }) 
@@ -22,7 +22,7 @@ const histogram = new prom.Histogram({
 
 // Summary
 const summary = new prom.Summary({
-  name: 'change_color_request_time_summary',
+  name: 'change_color_request_time_seconds',
   help: 'Response time in seconds to change color request',
   percentiles: [0.01, 0.1, 0.5, 0.9, 0.99]
 });
